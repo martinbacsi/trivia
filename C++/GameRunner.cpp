@@ -1,29 +1,17 @@
 ﻿#include <stdlib.h>
 #include "Game.h"
 
-static bool notAWinner;
 
 int main()
 {
-	Game aGame;
-
-	aGame.add("Chet");
-	aGame.add("Pat");
-	aGame.add("Sue");
-
-	do
+	Game mGame;
+	mGame.AddPlayer("Chet");
+	mGame.AddPlayer("Pat");
+	mGame.AddPlayer("Sue");
+	bool winner = false;
+	while (!winner && mGame.IsPlayable())
 	{
-
-		aGame.roll(rand() % 5 + 1);
-
-		if (rand() % 9 == 7)
-		{
-			notAWinner = aGame.wrongAnswer();
-		}
-		else
-		{
-			notAWinner = aGame.wasCorrectlyAnswered();
-		}
-	} while (notAWinner);
-
+		mGame.Roll();
+		winner = mGame.Answer(rand() % 9);
+	}
 }
